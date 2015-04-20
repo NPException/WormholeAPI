@@ -4,7 +4,7 @@
 
 This is the Wormhole API created by *Davenonymous*, *Jezza* and *NPException*.
 
-It is a simple way for Minecraft mods to interact with both: Compact Machines and Dimensional Pockets (and of course all other mods that might implement the central IWormhole interface).
+It is a simple way for Minecraft mods to interact with both: [Compact Machines](https://github.com/thraaawn/CompactMachines) and [Dimensional Pockets](https://github.com/NPException42/Dimensional-Pockets) (and of course all other mods that might implement the central IWormhole interface).
 
 For us as the developers of CM and DP it is kind of hard to make certain mods work with our blocks, and sometimes either hacky or performance heavy, or the results might not be as a player would naturally expect.
 
