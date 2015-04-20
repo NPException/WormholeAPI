@@ -6,4 +6,3 @@ package de.cdmp.api.wormhole;
 
 import cpw.mods.fml.common.API;
 
-
