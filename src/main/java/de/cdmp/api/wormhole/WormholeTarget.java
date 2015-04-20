@@ -1,5 +1,9 @@
 package de.cdmp.api.wormhole;
 
+import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
 public class WormholeTarget<B extends Block, T extends TileEntity> {
 	private final World blockWorld;
 	private final int blockX, blockY, blockZ;
@@ -14,4 +18,28 @@ public class WormholeTarget<B extends Block, T extends TileEntity> {
 		this.block = block;
 		this.tile = tile;
 	}
+
+    public World getBlockWorld() {
+        return blockWorld;
+    }
+
+    public int getBlockX() {
+        return blockX;
+    }
+
+    public int getBlockY() {
+        return blockY;
+    }
+
+    public int getBlockZ() {
+        return blockZ;
+    }
+
+    public B getBlock() {
+        return block;
+    }
+
+    public T getTile() {
+        return tile;
+    }
 }
