@@ -2,44 +2,74 @@ package de.cdmp.api.wormhole;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
 
+/**
+ * <b>(!) <i>You should NOT keep a WormholeTarget longer than the current tick,
+ * since it's information and referenced objects might be invalid or out of sync
+ * in the next tick!</i></b><br>
+ * A small piece of space that is adjacent to a wormhole. It will contain the
+ * Block type that is occupying that space, and may contain the TileEntity that
+ * is sitting there, if available.
+ * 
+ * @author Davenonymous, Jezza, NPException
+ *
+ */
 public class WormholeTarget<B extends Block, T extends TileEntity> {
-	private final World blockWorld;
-	private final int blockX, blockY, blockZ;
-	private final B block;
-	private final T tile;
+	private final IBlockAccess world;
+	private final int x, y, z;
+	private final ForgeDirection direction;
 
-	public WormholeTarget(final World blockWorld, final int blockX, final int blockY, final int blockZ, final B block, final T tile) {
-		this.blockWorld = blockWorld;
-		this.blockX = blockX;
-		this.blockY = blockY;
-		this.blockZ = blockZ;
-		this.block = block;
-		this.tile = tile;
+	private boolean blockLoaded;
+	private B block;
+
+	private boolean tileLoaded;
+	private T tile;
+
+	public WormholeTarget(final IBlockAccess world, final int x, final int y, final int z, ForgeDirection direction) {
+		this.world = world;
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.direction = direction;
 	}
 
-    public World getBlockWorld() {
-        return blockWorld;
-    }
+	public IBlockAccess getWorld() {
+		return world;
+	}
 
-    public int getBlockX() {
-        return blockX;
-    }
+	public int getX() {
+		return x;
+	}
 
-    public int getBlockY() {
-        return blockY;
-    }
+	public int getY() {
+		return y;
+	}
 
-    public int getBlockZ() {
-        return blockZ;
-    }
+	public int getZ() {
+		return z;
+	}
 
-    public B getBlock() {
-        return block;
-    }
+	public ForgeDirection getDirection() {
+		return direction;
+	}
 
-    public T getTile() {
-        return tile;
-    }
+	@SuppressWarnings("unchecked")
+	public B getBlock() {
+		if (!blockLoaded) {
+			block = (B) world.getBlock(x, y, z);
+			blockLoaded = true;
+		}
+		return block;
+	}
+
+	@SuppressWarnings("unchecked")
+	public T getTile() {
+		if (!tileLoaded) {
+			tile = (T) world.getTileEntity(x, y, z);
+			tileLoaded = true;
+		}
+		return tile;
+	}
 }
