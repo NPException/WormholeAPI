@@ -27,6 +27,14 @@ public class WormholeTarget<B extends Block, T extends TileEntity> {
 	private boolean tileLoaded;
 	private T tile;
 
+	/**
+	 * Creates a new WormholeTarget
+	 * @param world the target world
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param direction the direction in which the target lies relative to the wormhole exit
+	 */
 	public WormholeTarget(final IBlockAccess world, final int x, final int y, final int z, ForgeDirection direction) {
 		this.world = world;
 		this.x = x;
@@ -51,6 +59,10 @@ public class WormholeTarget<B extends Block, T extends TileEntity> {
 		return z;
 	}
 
+	/**
+	 * The direction the wormhole "exit" points to. (wormhole exit -> target)
+	 * @return
+	 */
 	public ForgeDirection getDirection() {
 		return direction;
 	}
